@@ -134,5 +134,3 @@ dmypy.json
 # secret_key django
 secrets.py
 
-#ingredients csv
-ingredients.csv
