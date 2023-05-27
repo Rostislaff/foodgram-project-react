@@ -1,7 +1,7 @@
 from django.contrib import admin
 
-from .models import (FavoriteRecipe, Ingredient, Recipe, RecipeIngredient,
-                     ShoppingCart, Subscribe, Tag)
+from .models import FavoriteRecipe, Ingredient, Recipe, RecipeIngredient,\
+                    ShoppingCart, Subscribe, Tag
 
 EMPTY_MSG = '-пусто-'
 
@@ -31,8 +31,8 @@ class RecipeAdmin(admin.ModelAdmin):
 
     @admin.display(description='Тэги')
     def get_tags(self, obj):
-        list_ = [_.name for _ in obj.tags.all()]
-        return ', '.join(list_)
+        tag_names = obj.tags.values_list('name', flat=True)
+        return ', '.join(tag_names)
 
     @admin.display(description=' Ингредиенты ')
     def get_ingredients(self, obj):
@@ -80,8 +80,7 @@ class FavoriteRecipeAdmin(admin.ModelAdmin):
         'id', 'user', 'get_recipe', 'get_count')
     empty_value_display = EMPTY_MSG
 
-    @admin.display(
-        description='Рецепты')
+    @admin.display(description='Рецепты')
     def get_recipe(self, obj):
         return [
             f'{item["name"]} ' for item in obj.recipe.values('name')[:5]]
