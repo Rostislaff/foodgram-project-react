@@ -10,7 +10,7 @@ services:
       - db_data:/var/lib/postgresql/data/
   frontend:
     build:
-      context: ../frontend
+      context: ../frontend/
       dockerfile: Dockerfile
     volumes:
       - ../frontend/:/app/result_build/
