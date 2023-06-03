@@ -49,12 +49,12 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/foodgram_backend:latest
 
-      - name: Frontend - Build and push Docker image
-        uses: docker/build-push-action@v4
-        with:
-          context: ./frontend
-          push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/foodgram_frontend:latest
+    #   - name: Frontend - Build and push Docker image
+    #     uses: docker/build-push-action@v4
+    #     with:
+    #       context: ./frontend
+    #       push: true
+    #       tags: ${{ secrets.DOCKER_USERNAME }}/foodgram_frontend:latest
 
   deploy:
     runs-on: ubuntu-latest
