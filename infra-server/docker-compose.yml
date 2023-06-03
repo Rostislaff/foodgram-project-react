@@ -8,12 +8,18 @@ services:
       - 5432:5432
     volumes:
       - db_data:/var/lib/postgresql/data/
+  # frontend:
+  #   build:
+  #     context: ../frontend
+  #     dockerfile: Dockerfile
+  #   volumes:
+  #     - ../frontend/:/app/result_build/
   frontend:
-    build:
-      context: ../frontend
-      dockerfile: Dockerfile
+    image: rossanna/foodgram_frontend:latest
     volumes:
       - ../frontend/:/app/result_build/
+    depends_on:
+      - backend
   nginx:
     image: nginx:1.19.3
     ports:
