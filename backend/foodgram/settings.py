@@ -103,6 +103,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+CSRF_TRUSTED_ORIGINS = ['http://51.250.92.178/']
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
