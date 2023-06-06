@@ -254,14 +254,18 @@ class RecipesViewSet(viewsets.ModelViewSet):
                         y_position = 800
 
         def draw_empty_shopping_cart():
-            page.setFont('Vera', 24)
+            page.setFont('Times-Roman', 24)
             page.drawString(
                 x_position,
                 y_position,
                 'Cписок покупок пуст!')
 
         shopping_cart = generate_shopping_cart()
-        draw_shopping_cart(shopping_cart) if shopping_cart else draw_empty_shopping_cart()
+        if shopping_cart:
+            draw_shopping_cart(shopping_cart)
+        else:
+            draw_empty_shopping_cart()
+            page.showPage()
 
         page.save()
         buffer.seek(0)
