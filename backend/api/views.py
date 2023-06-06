@@ -224,7 +224,7 @@ class RecipesViewSet(viewsets.ModelViewSet):
 
         buffer = io.BytesIO()
         page = canvas.Canvas(buffer)
-        pdfmetrics.registerFont(TTFont('Vera', 'Vera.ttf'))
+        pdfmetrics.registerFont(TTFont('Arial', 'Arial.ttf'))
         x_position, y_position = 50, 800
         shopping_cart = (
             request.user.shopping_cart.recipe.
@@ -235,7 +235,7 @@ class RecipesViewSet(viewsets.ModelViewSet):
         page.setFont('Vera', 14)
         if shopping_cart:
             indent = 20
-            page.drawString(x_position, y_position, 'Cписок покупок:')
+            page.drawString(x_position, y_position, 'Shopping list:')
             for index, recipe in enumerate(shopping_cart, start=1):
                 page.drawString(
                     x_position, y_position - indent,
@@ -250,11 +250,11 @@ class RecipesViewSet(viewsets.ModelViewSet):
             buffer.seek(0)
             return FileResponse(
                 buffer, as_attachment=True, filename=FILENAME)
-        page.setFont('Vera', 24)
+        page.setFont('Arial', 24)
         page.drawString(
             x_position,
             y_position,
-            'Cписок покупок пуст!')
+            'Shopping list is empty!')
         page.save()
         buffer.seek(0)
         return FileResponse(buffer, as_attachment=True, filename=FILENAME)
