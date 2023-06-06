@@ -229,7 +229,7 @@ class RecipesViewSet(viewsets.ModelViewSet):
 
         def generate_shopping_cart():
             shopping_cart = (
-                request.user.shopping_cart.recipe.
+                request.user.shopping_cart.recipes.
                 values(
                 'ingredients__name',
                 'ingredients__measurement_unit'
