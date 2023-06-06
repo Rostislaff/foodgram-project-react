@@ -211,7 +211,7 @@ class RecipeWriteSerializer(serializers.ModelSerializer):
                     'Количество ингредиента >= 1!')
         return ingredients
 
-    def _create_ingredients(self, ingredients, recipe):
+    def create_ingredients(self, ingredients, recipe):
         for ingredient in ingredients:
             RecipeIngredient.objects.create(
                 recipe=recipe,
