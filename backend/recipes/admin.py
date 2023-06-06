@@ -94,7 +94,7 @@ class FavoriteRecipeAdmin(admin.ModelAdmin):
 
 
 @admin.register(ShoppingCart)
-class SoppingCartAdmin(admin.ModelAdmin):
+class ShoppingCartAdmin(admin.ModelAdmin):
     list_display = (
         'id', 'user', 'get_recipe', 'get_count')
     empty_value_display = EMPTY_MSG
