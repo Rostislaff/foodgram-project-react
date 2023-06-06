@@ -1,17 +1,17 @@
-import io
+# import io
 
 from django.contrib.auth import get_user_model
 from django.contrib.auth.hashers import make_password
 from django.db.models.aggregates import Count, Sum
 from django.db.models.expressions import Exists, OuterRef, Value
-from django.http import FileResponse
+# from django.http import FileResponse
 from django.shortcuts import get_object_or_404
 from backend.api.utils import ingredients_export
-from backend.recipes.admin import FavoriteRecipeAdmin
+# from backend.recipes.admin import FavoriteRecipeAdmin
 from djoser.views import UserViewSet
-from reportlab.pdfbase import pdfmetrics
-from reportlab.pdfbase.ttfonts import TTFont
-from reportlab.pdfgen import canvas
+# from reportlab.pdfbase import pdfmetrics
+# from reportlab.pdfbase.ttfonts import TTFont
+# from reportlab.pdfgen import canvas
 from rest_framework import generics, status, viewsets
 from rest_framework.authtoken.models import Token
 from rest_framework.authtoken.views import ObtainAuthToken
@@ -32,7 +32,7 @@ from .serializers import (IngredientSerializer, RecipeReadSerializer, RecipeUser
                           UserPasswordSerializer)
 
 User = get_user_model()
-FILENAME = 'shoppingcart.pdf'
+# FILENAME = 'shoppingcart.pdf'
 
 
 class GetObjectMixin:
@@ -182,8 +182,10 @@ class UsersViewSet(UserViewSet):
             context={'request': request})
         return self.get_paginated_response(serializer.data)
 
+
 class RecipesViewSet(viewsets.ModelViewSet):
     """Рецепты"""
+
     queryset = Recipe.objects.all()
     permission_classes = (IsAuthenticatedOrReadOnly)
     filterset_class = RecipeFilter
