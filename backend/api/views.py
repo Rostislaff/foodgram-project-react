@@ -224,7 +224,7 @@ class RecipesViewSet(viewsets.ModelViewSet):
 
         buffer = io.BytesIO()
         page = canvas.Canvas(buffer)
-        pdfmetrics.registerFont(TTFont('Vera', 'Vera.ttf'))
+        pdfmetrics.registerFont(TTFont('Times-Roman', 'Times-Roman.ttf'))
         x_position, y_position = 50, 800
 
         def generate_shopping_cart():
@@ -234,10 +234,11 @@ class RecipesViewSet(viewsets.ModelViewSet):
                 'ingredients__name',
                 'ingredients__measurement_unit'
             ).annotate(amount=Sum('recipe__amount')).order_by())
-            return shopping_cart
+            return list(shopping_cart)
+            # return shopping_cart
 
         def draw_shopping_cart(shopping_cart):
-            page.setFont('Vera', 14)
+            page.setFont('Times-Roman', 14)
             if shopping_cart:
                 indent = 20
                 page.drawString(x_position, y_position, 'Cписок покупок:')
