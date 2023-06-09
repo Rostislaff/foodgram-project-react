@@ -33,6 +33,7 @@ User = get_user_model()
 FILENAME = 'shoppingcart.pdf'
 file_path = os.path.join(os.path.dirname(__file__), 'Vera.ttf')
 
+
 class GetObjectMixin:
     """Миксина для удаления/добавления рецептов избранных/корзины."""
 
