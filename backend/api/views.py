@@ -1,5 +1,5 @@
 import io
-
+import os
 from django.contrib.auth import get_user_model
 from django.contrib.auth.hashers import make_password
 from django.db.models.aggregates import Count, Sum
@@ -31,7 +31,7 @@ from .serializers import (IngredientSerializer, RecipeReadSerializer,
 
 User = get_user_model()
 FILENAME = 'shoppingcart.pdf'
-
+file_path = os.path.join(os.path.dirname(__file__), 'Vera.ttf')
 
 class GetObjectMixin:
     """Миксина для удаления/добавления рецептов избранных/корзины."""
@@ -224,7 +224,7 @@ class RecipesViewSet(viewsets.ModelViewSet):
 
         buffer = io.BytesIO()
         page = canvas.Canvas(buffer)
-        pdfmetrics.registerFont(TTFont('Vera', 'Vera.ttf'))
+        pdfmetrics.registerFont(TTFont('Vera', file_path))
         x_position, y_position = 50, 800
         shopping_cart = (
             request.user.shopping_cart.recipe.
