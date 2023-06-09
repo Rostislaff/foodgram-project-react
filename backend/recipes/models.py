@@ -1,3 +1,4 @@
+from django.core.validators import RegexValidator
 from django.contrib.auth import get_user_model
 from django.core import validators
 from django.db import models
@@ -32,7 +33,12 @@ class Tag(models.Model):
     color = models.CharField(
         'Цвет',
         max_length=7,
-        unique=True)
+        unique=True, validators=[
+            RegexValidator(
+                r'^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$',
+                'Цвет должен быть в формате HEX!'
+            )
+        ])
     slug = models.SlugField(
         'Ссылка',
         max_length=100,
