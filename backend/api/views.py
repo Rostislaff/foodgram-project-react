@@ -7,7 +7,7 @@ from django.db.models.expressions import Exists, OuterRef, Value
 from django.http import FileResponse
 from django.shortcuts import get_object_or_404
 from .utils import ingredients_export
-from backend.recipes.models import RecipeIngredient
+from recipes.models import RecipeIngredient
 from djoser.views import UserViewSet
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
