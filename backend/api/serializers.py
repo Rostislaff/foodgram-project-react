@@ -1,5 +1,3 @@
-import re
-# from rest_framework.validators import RegexValidator
 import django.contrib.auth.password_validation as validators
 from django.contrib.auth import authenticate, get_user_model
 from django.contrib.auth.hashers import make_password
