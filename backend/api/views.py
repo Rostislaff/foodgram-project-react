@@ -268,7 +268,11 @@ class IngredientsViewSet(
 @api_view(['GET'])
 def search_ingredients(request):
     name = request.GET.get('name')
-    ingredients = Ingredient.objects.filter(name__icontains=name).order_by('name')
+    words = name.split()
+    conditions = Q()
+    for word in words:
+        conditions &= Q(name__icontains=word)
+    ingredients = Ingredient.objects.filter(conditions).order_by('name')
     serializer = IngredientSerializer(ingredients, many=True)
     return Response(serializer.data)
 
