@@ -265,6 +265,26 @@ class RecipeReadSerializer(serializers.ModelSerializer):
         model = Recipe
         fields = '__all__'
 
+    def get_filtered_ingredients(self, instance, query):
+        filtered_ingredients = []
+        ingredients = instance.recipe.all()
+        for ingredient in ingredients:
+            if any(word.lower() in ingredient.name.lower() for word in query):
+                filtered_ingredients.append(ingredient)
+        return filtered_ingredients
+
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        request = self.context.get('request')
+        query_params = request.query_params.get('query')
+        if query_params:
+            query = query_params.lower().split()
+            filtered_ingredients = self.get_filtered_ingredients(instance, query)
+            representation['ingredients'] = RecipeIngredientSerializer(
+                filtered_ingredients,
+                many=True).data
+        return representation
+
 
 class SubscribeRecipeSerializer(serializers.ModelSerializer):
 

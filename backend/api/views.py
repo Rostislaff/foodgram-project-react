@@ -255,14 +255,14 @@ class IngredientsViewSet(
     serializer_class = IngredientSerializer
     filterset_class = IngredientFilter
 
-    def get_queryset(self):
-        name = self.request.query_params.get('name')
-        words = name.split()
-        conditions = Q()
-        for word in words:
-            conditions &= Q(name__icontains=word)
-        queryset = Ingredient.objects.filter(conditions)
-        return queryset
+    # def get_queryset(self):
+    #     name = self.request.query_params.get('name')
+    #     words = name.split()
+    #     conditions = Q()
+    #     for word in words:
+    #         conditions &= Q(name__icontains=word)
+    #     queryset = Ingredient.objects.filter(conditions)
+    #     return queryset
 
 
 # @api_view(['GET'])
