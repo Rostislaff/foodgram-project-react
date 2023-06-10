@@ -8,6 +8,7 @@ from django.http import FileResponse
 from django.shortcuts import get_object_or_404
 from .utils import ingredients_export
 from recipes.models import RecipeIngredient
+from django.db.models import Q
 from djoser.views import UserViewSet
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
@@ -253,6 +254,15 @@ class IngredientsViewSet(
     queryset = Ingredient.objects.all()
     serializer_class = IngredientSerializer
     filterset_class = IngredientFilter
+
+    def get_queryset(self):
+        query = self.request.query_params.get('query')
+        words = query.split()
+        conditions = Q()
+        for word in words:
+            conditions |= Q(name__icontains=word)
+        queryset = Ingredient.objects.filter(conditions)
+        return queryset
 
 
 @api_view(['post'])
