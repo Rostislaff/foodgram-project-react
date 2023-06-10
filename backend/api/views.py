@@ -260,7 +260,7 @@ class IngredientsViewSet(
         words = name.split()
         conditions = Q()
         for word in words:
-            conditions |= Q(name__icontains=word)
+            conditions &= Q(name__icontains=word)
         queryset = Ingredient.objects.filter(conditions)
         return queryset
 
