@@ -31,6 +31,7 @@ class IngredientFilter(filters.FilterSet):
         model = Ingredient
         fields = ('name',)
 
+
 class RecipeFilter(filters.FilterSet):
     tags = filters.ModelMultipleChoiceFilter(
         field_name='tags__slug',
