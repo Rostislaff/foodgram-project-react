@@ -264,12 +264,14 @@ class IngredientsViewSet(
         queryset = Ingredient.objects.filter(conditions)
         return queryset
 
+
 @api_view(['GET'])
 def search_ingredients(request):
     query = request.GET.get('query')
     ingredients = Ingredient.objects.filter(name__icontains=query).order_by('name')
     serializer = IngredientSerializer(ingredients, many=True)
     return Response(serializer.data)
+
 
 @api_view(['post'])
 def set_password(request):
