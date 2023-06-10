@@ -271,12 +271,8 @@ class RecipeReadSerializer(serializers.ModelSerializer):
         ingredients = instance.recipe.all()
         for ingredient in ingredients:
             ingredient_name = ingredient.name.lower()
-            found = False
-            for word in query:
-                if re.search(r'\b{}\b'.format(word), ingredient_name):
-                    found = True
-                    break
-            if found:
+            words = query.split()
+            if all(word in ingredient_name for word in words):
                 filtered_ingredients.append(ingredient)
         return filtered_ingredients
 
