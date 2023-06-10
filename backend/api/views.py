@@ -256,8 +256,8 @@ class IngredientsViewSet(
     filterset_class = IngredientFilter
 
     def get_queryset(self):
-        query = self.request.query_params.get('query')
-        words = query.split()
+        name = self.request.query_params.get('name')
+        words = name.split()
         conditions = Q()
         for word in words:
             conditions |= Q(name__icontains=word)
@@ -267,8 +267,8 @@ class IngredientsViewSet(
 
 @api_view(['GET'])
 def search_ingredients(request):
-    query = request.GET.get('query')
-    ingredients = Ingredient.objects.filter(name__icontains=query).order_by('name')
+    name = request.GET.get('name')
+    ingredients = Ingredient.objects.filter(name__icontains=name).order_by('name')
     serializer = IngredientSerializer(ingredients, many=True)
     return Response(serializer.data)
 
