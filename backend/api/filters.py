@@ -2,7 +2,7 @@ from django.core.exceptions import ValidationError
 import django_filters as filters
 
 from users.models import User
-from recipes.models import Ingredient, Recipe
+from recipes.models import Ingredient, Recipe, Tag
 
 
 class TagsMultipleChoiceField(
@@ -41,8 +41,10 @@ class RecipeFilter(filters.FilterSet):
     is_favorited = filters.BooleanFilter(
         widget=filters.widgets.BooleanWidget(),
         label='В избранных.')
-    tags = filters.AllValuesMultipleFilter(
+    tags = filters.ModelMultipleChoiceFilter(
+        queryset=Tag.objects.all(),
         field_name='tags__slug',
+        to_field_name='slug',
         label='Ссылка')
 
     class Meta:
@@ -60,6 +62,3 @@ class RecipeFilter(filters.FilterSet):
         if value and not user.is_anonymous:
             return queryset.filter(shopping_cart__user=user)
         return queryset
-
-
-

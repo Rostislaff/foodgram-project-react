@@ -1,4 +1,3 @@
-import re
 import django.contrib.auth.password_validation as validators
 from django.contrib.auth import authenticate, get_user_model
 from django.contrib.auth.hashers import make_password
@@ -275,18 +274,6 @@ class RecipeReadSerializer(serializers.ModelSerializer):
             if all(word in ingredient_name for word in words) or any(word in ingredient_name.split() for word in words):
                 filtered_ingredients.append(ingredient)
         return filtered_ingredients
-
-    # def to_representation(self, instance):
-    #     representation = super().to_representation(instance)
-    #     request = self.context.get('request')
-    #     query_params = request.query_params.get('query')
-    #     if query_params:
-    #         query = query_params.lower().split()
-    #         filtered_ingredients = self.get_filtered_ingredients(instance, query)
-    #         representation['ingredients'] = RecipeIngredientSerializer(
-    #             filtered_ingredients,
-    #             many=True).data
-    #     return representation
 
 
 class SubscribeRecipeSerializer(serializers.ModelSerializer):

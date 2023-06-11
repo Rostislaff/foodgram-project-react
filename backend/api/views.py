@@ -1,18 +1,12 @@
-import io
 import os
 from django.contrib.auth import get_user_model
 from django.contrib.auth.hashers import make_password
 from django.db.models.aggregates import Count, Sum
 from django.db.models.expressions import Exists, OuterRef, Value
-from django.http import FileResponse
 from django.shortcuts import get_object_or_404
 from .utils import ingredients_export
 from recipes.models import RecipeIngredient
-from django.db.models import Q
 from djoser.views import UserViewSet
-from reportlab.pdfbase import pdfmetrics
-from reportlab.pdfbase.ttfonts import TTFont
-from reportlab.pdfgen import canvas
 from rest_framework import generics, status, viewsets
 from rest_framework.authtoken.models import Token
 from rest_framework.authtoken.views import ObtainAuthToken
@@ -254,27 +248,6 @@ class IngredientsViewSet(
     queryset = Ingredient.objects.all()
     serializer_class = IngredientSerializer
     filterset_class = IngredientFilter
-
-    # def get_queryset(self):
-    #     name = self.request.query_params.get('name')
-    #     words = name.split()
-    #     conditions = Q()
-    #     for word in words:
-    #         conditions &= Q(name__icontains=word)
-    #     queryset = Ingredient.objects.filter(conditions)
-    #     return queryset
-
-
-# @api_view(['GET'])
-# def search_ingredients(request):
-#     name = request.GET.get('name')
-#     words = name.split()
-#     conditions = Q()
-#     for word in words:
-#         conditions &= Q(name__icontains=word)
-#     ingredients = Ingredient.objects.filter(conditions).order_by('name')
-#     serializer = IngredientSerializer(ingredients, many=True)
-#     return Response(serializer.data)
 
 
 @api_view(['post'])
