@@ -25,7 +25,7 @@ class TagsFilter(filters.AllValuesMultipleFilter):
 
 
 class IngredientFilter(filters.FilterSet):
-    name = filters.CharFilter(lookup_expr='istartswith')
+    name = filters.CharFilter(lookup_expr='icontains')
 
     class Meta:
         model = Ingredient
